@@ -6,7 +6,6 @@ namespace WinFormsApp_Test2
     {
         static CupPrinter CupPrinter;
         static Cup Cup = new Cup();
-        static BrickBrushPalette BrickBrushPalette = new BrickBrushPalette();
         static MainForm MainForm;
         static Graphics Graphics;
         static Graphics SecondGraphics;
@@ -48,7 +47,7 @@ namespace WinFormsApp_Test2
             CupPrinter = new CupPrinter(CupOffsetX, CupOffsetY, SecondGraphics, Cup);
 
 
-            FallingShape = CreateRandomShape();
+            FallingShape = RandomShapeCreator.Create();
             FallingShape.Row = 17;
             FallingShape.Col = 0;
             FallingShapePrinter = new(CupOffsetX, CupOffsetY, SecondGraphics, FallingShape);
@@ -64,28 +63,6 @@ namespace WinFormsApp_Test2
             FallingShapePrinter.Print();
             BufferedGraphics.Render(Graphics);
             
-        }
-
-        private static Shape CreateRandomShape()
-        {
-            int newBrickBrushIndex = new Random().Next(1, BrickBrushPalette.Palette.Length - 1);
-            int randomIndex = new Random().Next(0, Tetramino.Palette.Length - 1);
-            int[,] shapeTemplate = Tetramino.Palette[randomIndex];
-
-            int templateRows = shapeTemplate.GetUpperBound(0) + 1;
-            int templateCols = shapeTemplate.Length / templateRows;
-
-            Shape randomShape = new(templateRows, templateCols);
-
-            for(int row = 0; row < templateRows; row++)
-            {
-                for(int col = 0; col < templateCols; col++)
-                {
-                    randomShape.Bricks[row,col] = shapeTemplate[row, col] * newBrickBrushIndex;
-                }
-            }
-
-            return randomShape;
         }
     }
 }
