@@ -1,28 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WinFormsApp_Test2
+﻿namespace WinFormsApp_Test2
 {
-    internal class FallingShapePrinter : BrickMapPrinter
-    {
-        private GameState _gameState;
-        public FallingShapePrinter(int offsetX, int offsetY, Graphics graphics, GameState gameState) 
-            : base(offsetX, offsetY, graphics, gameState.FallingShape)
-        {
-            _gameState = gameState;
-        }
+	internal class FallingShapePrinter : BrickMapPrinter
+	{
+		private readonly GameState _gameState;
 
-        protected override int CalculateBrickX(int col)
-        {
-            return base.CalculateBrickX(col) + _gameState.FallingShapeX * _brickSize;
-        }
+		public FallingShapePrinter(int offsetX, int offsetY, Graphics graphics, GameState gameState)
+			 : base(offsetX, offsetY, graphics)
+		{
+			_gameState = gameState;
+		}
 
-        protected override int CalculateBrickY(int row)
-        {
-            return base.CalculateBrickY(row) + _gameState.FallingShapeY * _brickSize;
-        }
-    }
+		protected override Brush[,] BrickMap => _gameState.FallingShape;
+
+		protected override int CalculateBrickX(int col) => base.CalculateBrickX(col) + _gameState.FallingShapeX * _brickSize;
+
+		protected override int CalculateBrickY(int row)
+		{
+			return base.CalculateBrickY(row) + _gameState.FallingShapeY * _brickSize;
+		}
+	}
 }

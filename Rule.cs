@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WinFormsApp_Test2
+﻿namespace WinFormsApp_Test2
 {
-    abstract internal class Rule
-    {
-        public abstract void Execute();
-        public abstract void Init();
-    }
+	abstract internal class Rule
+	{
+		public abstract void Start();
+		public abstract void Tick();
+	}
 }

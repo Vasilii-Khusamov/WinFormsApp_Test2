@@ -1,48 +1,63 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WinFormsApp_Test2
+﻿namespace WinFormsApp_Test2
 {
-    internal class CupPrinter : BrickMapPrinter
-    {
-        const int CupThickness = 10;
-        SolidBrush BackgroundBrush = new SolidBrush(Color.Black);
-        SolidBrush CupBrush = new SolidBrush(Color.White);
+	internal class CupPrinter : BrickMapPrinter
+	{
+		GameState _gameState;
 
-        public CupPrinter(int offsetX, int offsetY, Graphics graphics, GameState gameState) 
-            : base(offsetX, offsetY, graphics, gameState.Cup)
-        {}
+		/// <summary>
+		/// Толщина стенок стакана. Единица измерения пиксели.
+		/// </summary>
+		private readonly int _cupThickness;
 
-        public override void Print()
-        {
-            PrintCupWalls();
-            base.Print();
-        }
+		/// <summary>
+		/// Кисть для закрашивания фона стакана.
+		/// </summary>
+		private readonly SolidBrush _backgroundBrush = new SolidBrush(Color.Black);
 
-        private void PrintCupWalls()
-        {
-            int brickMapCols = _brickMap.GetUpperBound(0) + 1;
-            int brickMapRows = _brickMap.GetUpperBound(1) + 1;
+		/// <summary>
+		/// Кисть для закрашивания стенок стакана.
+		/// </summary>
+		private readonly SolidBrush _cupBrush = new SolidBrush(Color.Yellow);
 
-            _graphics.FillRectangle(
-                CupBrush, 
-                _offsetX - CupThickness, 
-                _offsetY, 
-                brickMapCols * _brickSize + CupThickness * 2,
-                brickMapRows * _brickSize + CupThickness
-            );
+		protected override Brush[,] BrickMap => _gameState.Cup;
 
-            _graphics.FillRectangle(
-                BackgroundBrush, 
-                _offsetX, 
-                _offsetY, 
-                brickMapCols * _brickSize,
-                brickMapRows * _brickSize
-            );
-        }
+		public CupPrinter(int offsetX, int offsetY, Graphics graphics, GameState gameState, int cupThickness)
+			 : base(offsetX + cupThickness, offsetY, graphics)
+		{
+			_gameState = gameState;
+			_cupThickness = cupThickness;
+		}
+		
+		public override void Print()
+		{
+			PrintBackgroundAndWalls();
+			base.Print();
+		}
 
-    }
+		/// <summary>
+		/// Напечатать фон и стенки стакана.
+		/// </summary>
+		private void PrintBackgroundAndWalls()
+		{
+			int brickMapRows = BrickMap.GetUpperBound(0) + 1;
+			int brickMapCols = BrickMap.GetUpperBound(1) + 1;
+
+			_graphics.FillRectangle(
+				 _cupBrush,
+				 _offsetX - _cupThickness,
+				 _offsetY,
+				 brickMapCols * _brickSize + _cupThickness * 2,
+				 brickMapRows * _brickSize + _cupThickness
+			);
+
+			_graphics.FillRectangle(
+				 _backgroundBrush,
+				 _offsetX,
+				 _offsetY,
+				 brickMapCols * _brickSize,
+				 brickMapRows * _brickSize
+			);
+		}
+
+	}
 }

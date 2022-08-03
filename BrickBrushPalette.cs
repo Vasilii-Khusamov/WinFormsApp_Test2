@@ -1,30 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WinFormsApp_Test2
+﻿namespace WinFormsApp_Test2
 {
-    internal class BrickBrushPalette
-    {
-        public static Brush EmptyBrush { 
-            get { 
-                const int EmptyBrishIndex = 0;
-                return Palette[EmptyBrishIndex]; 
-            } 
-        }
+	internal class BrickBrushPalette
+	{
+		public static Brush EmptyBrickBrush
+		{
+			get
+			{
+				const int EmptyBrickBrushIndex = 0;
+				return Palette[EmptyBrickBrushIndex];
+			}
+		}
 
-        public static SolidBrush[] Palette = {
-             new SolidBrush(Color.FromArgb(0, Color.Black)),
-             new SolidBrush(Color.Red),
-             new SolidBrush(Color.Orange),
-             new SolidBrush(Color.Yellow),
-             new SolidBrush(Color.Green),
-             new SolidBrush(Color.Blue),
-             new SolidBrush(Color.Cyan),
-             new SolidBrush(Color.DarkViolet),
-        };
+		public static SolidBrush[] Palette = {
+			new SolidBrush(Color.FromArgb(0, Color.Black)),
+			new SolidBrush(Color.Red),
+			new SolidBrush(Color.Orange),
+			new SolidBrush(Color.Yellow),
+			new SolidBrush(Color.Green),
+			new SolidBrush(Color.Blue),
+			new SolidBrush(Color.Cyan),
+			new SolidBrush(Color.DarkViolet),
+		};
 
-    }
+	}
 }
