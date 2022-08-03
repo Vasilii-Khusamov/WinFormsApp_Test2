@@ -1,5 +1,9 @@
 ﻿namespace WinFormsApp_Test2
 {
+	/// <summary>
+	/// Класс построен на основе примера со страницы:
+	/// https://docs.microsoft.com/ru-ru/dotnet/api/system.drawing.bufferedgraphics?view=windowsdesktop-3.1
+	/// </summary>
 	internal class SecondBufferPrinter : Printer
 	{
 		private Graphics _mainGraphics;
