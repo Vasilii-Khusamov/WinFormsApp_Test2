@@ -8,9 +8,15 @@ namespace WinFormsApp_Test2
 {
     internal class BrickBrushPalette
     {
+        public static Brush EmptyBrush { 
+            get { 
+                const int EmptyBrishIndex = 0;
+                return Palette[EmptyBrishIndex]; 
+            } 
+        }
 
         public static SolidBrush[] Palette = {
-             new SolidBrush(Color.FromArgb(0, Color.Black)), // Это цвет ячейки, когда в ней нет кирпичика.
+             new SolidBrush(Color.FromArgb(0, Color.Black)),
              new SolidBrush(Color.Red),
              new SolidBrush(Color.Orange),
              new SolidBrush(Color.Yellow),

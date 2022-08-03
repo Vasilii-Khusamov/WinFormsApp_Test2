@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace WinFormsApp_Test2
 {
-    internal class Cup : BrickMap
+    abstract internal class Rule
     {
-        public Cup() : base(20, 10)
-        {
-            
-        }
+        public abstract void Execute();
+        public abstract void Init();
     }
 }

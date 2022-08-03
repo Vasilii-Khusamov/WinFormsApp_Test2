@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace WinFormsApp_Test2
 {
-    abstract internal class BrickMapPrinter
+    abstract internal class BrickMapPrinter : Printer
     {
         protected const int _brickSize = 30;
         protected int _offsetX;
         protected int _offsetY;
         protected Graphics _graphics;
-        protected BrickMap _brickMap;
+        protected Brush[,] _brickMap;
 
-        public BrickMapPrinter(int offsetX, int offsetY, Graphics graphics, BrickMap brickMap)
+        public BrickMapPrinter(int offsetX, int offsetY, Graphics graphics, Brush[,] brickMap)
         {
             _offsetX = offsetX;
             _offsetY = offsetY;
@@ -22,13 +22,16 @@ namespace WinFormsApp_Test2
             _brickMap = brickMap;
         }
 
-        public virtual void Print()
+        public override void Print()
         {
-            for (int row = 0; row < _brickMap.Rows; row++)
+            int rows = _brickMap.GetUpperBound(0) + 1;
+            int cols = _brickMap.GetUpperBound(1) + 1;
+
+            for (int row = 0; row < rows; row++)
             {
-                for (int col = 0; col < _brickMap.Cols; col++)
+                for (int col = 0; col < cols; col++)
                 {
-                    SolidBrush brickBrush = BrickBrushPalette.Palette[_brickMap.Bricks[row, col]];
+                    Brush brickBrush = _brickMap[row, col];
                     int x = CalculateBrickX(col);
                     int y = CalculateBrickY(row);
                     int width = _brickSize;

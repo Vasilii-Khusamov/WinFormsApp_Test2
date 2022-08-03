@@ -12,8 +12,8 @@ namespace WinFormsApp_Test2
         SolidBrush BackgroundBrush = new SolidBrush(Color.Black);
         SolidBrush CupBrush = new SolidBrush(Color.White);
 
-        public CupPrinter(int offsetX, int offsetY, Graphics graphics, Cup brickMap) 
-            : base(offsetX, offsetY, graphics, brickMap)
+        public CupPrinter(int offsetX, int offsetY, Graphics graphics, GameState gameState) 
+            : base(offsetX, offsetY, graphics, gameState.Cup)
         {}
 
         public override void Print()
@@ -24,20 +24,23 @@ namespace WinFormsApp_Test2
 
         private void PrintCupWalls()
         {
+            int brickMapCols = _brickMap.GetUpperBound(0) + 1;
+            int brickMapRows = _brickMap.GetUpperBound(1) + 1;
+
             _graphics.FillRectangle(
                 CupBrush, 
                 _offsetX - CupThickness, 
                 _offsetY, 
-                _brickMap.Cols * _brickSize + CupThickness * 2, 
-                _brickMap.Rows * _brickSize + CupThickness
+                brickMapCols * _brickSize + CupThickness * 2,
+                brickMapRows * _brickSize + CupThickness
             );
 
             _graphics.FillRectangle(
                 BackgroundBrush, 
                 _offsetX, 
                 _offsetY, 
-                _brickMap.Cols * _brickSize,
-                _brickMap.Rows * _brickSize
+                brickMapCols * _brickSize,
+                brickMapRows * _brickSize
             );
         }
 

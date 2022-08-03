@@ -4,19 +4,14 @@ namespace WinFormsApp_Test2
 {
     internal static class Program
     {
-        static CupPrinter CupPrinter;
-        static Cup Cup = new Cup();
         static MainForm MainForm;
-        static Graphics Graphics;
-        static Graphics SecondGraphics;
-        static BufferedGraphics BufferedGraphics;
-        static Shape FallingShape;
-        static ShapePrinter FallingShapePrinter;
 
         const int BrickSize = 30;
         const int CupThickness = 10;
         const int CupOffsetX = 15;
         const int CupOffsetY = 5;
+
+
 
         /// <summary>
         ///  The main entry point for the application.
@@ -28,41 +23,56 @@ namespace WinFormsApp_Test2
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
+            const int cupRows = 20;
+            const int cupCols = 10;
+            GameState gameState = new GameState();
 
-            WinFormTimer gameTimer = new WinFormTimer();
-            gameTimer.Interval = 33;
-            gameTimer.Tick += Tick;
 
-            int MainFormWidth = Cup.Cols * BrickSize + CupThickness * 2 + CupOffsetX * 2 + 15 + 200;
-            int MainFormHeight = Cup.Rows * BrickSize + CupThickness + CupOffsetY + 45;
+
+            
+
+
+
+            int mainFormHeight = cupRows * BrickSize + CupThickness + CupOffsetY + 45;
+            int mainFormWidth = cupCols * BrickSize + CupThickness * 2 + CupOffsetX * 2 + 15 + 200;
+
+
+
+
 
             MainForm = new MainForm();
-            MainForm.Size = new(MainFormWidth, MainFormHeight);
-            Graphics = Graphics.FromHwnd(MainForm.Handle);
+            MainForm.Size = new(mainFormWidth, mainFormHeight);
+            Graphics mainGraphics = Graphics.FromHwnd(MainForm.Handle);
 
-            BufferedGraphicsContext bufferedGraphicsContext = BufferedGraphicsManager.Current;
-            BufferedGraphics = bufferedGraphicsContext.Allocate(Graphics, new Rectangle(0, 0, MainFormWidth, MainFormHeight));
-            SecondGraphics = BufferedGraphics.Graphics;
+            SecondBufferPrinter secondBufferPrinter = new SecondBufferPrinter(mainGraphics, mainFormWidth, mainFormHeight);
+            Graphics secondGraphics = secondBufferPrinter.SecondGraphics;
 
-            CupPrinter = new CupPrinter(CupOffsetX, CupOffsetY, SecondGraphics, Cup);
+            ClearPrinter clearPrinter = new ClearPrinter(secondGraphics);
+            CupPrinter cupPrinter = new CupPrinter(CupOffsetX, CupOffsetY, secondGraphics, gameState);
+            FallingShapePrinter fallingShapePrinter  = new FallingShapePrinter(CupOffsetX, CupOffsetY, secondGraphics, gameState);
+
+            GameRenderer gameRenderer = new GameRenderer(new Printer[] { clearPrinter, cupPrinter, fallingShapePrinter, secondBufferPrinter });
 
 
-            FallingShape = RandomShapeCreator.Create();
-            FallingShape.Row = 17;
-            FallingShape.Col = 0;
-            FallingShapePrinter = new(CupOffsetX, CupOffsetY, SecondGraphics, FallingShape);
 
-            gameTimer.Start();
+            Game game = new Game(gameRenderer, gameState, new Rule[0]);
+
+            game.GameState.Cup = new Brush[cupRows, cupCols];
+
+            for (int row = 0; row < cupRows; row++)
+            {
+                for (int col = 0; col < cupCols; col++)
+                {
+                    game.GameState.Cup[row, col] = new SolidBrush(Color.FromArgb(0));
+                }
+            }
+
+            game.GameState.FallingShape = RandomShapeCreator.Create();
+
+
+
             Application.Run(MainForm);
         }
 
-        private static void Tick(object? sender, EventArgs e)
-        {
-            SecondGraphics.Clear(Color.Black);
-            CupPrinter.Print();
-            FallingShapePrinter.Print();
-            BufferedGraphics.Render(Graphics);
-            
-        }
     }
 }
