@@ -12,11 +12,11 @@
 
 		protected override Brush[,] BrickMap => _gameState.FallingShape;
 
-		protected override int CalculateBrickX(int col) => base.CalculateBrickX(col) + _gameState.FallingShapeX * _brickSize;
+		protected override int CalculateBrickX(int col) => base.CalculateBrickX(col) + _gameState.FallingShapeCol * _brickSize;
 
 		protected override int CalculateBrickY(int row)
 		{
-			return base.CalculateBrickY(row) + _gameState.FallingShapeY * _brickSize;
+			return base.CalculateBrickY(row) + _gameState.FallingShapeRow * _brickSize;
 		}
 	}
 }
