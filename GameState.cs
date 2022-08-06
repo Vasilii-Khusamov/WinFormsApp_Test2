@@ -15,6 +15,9 @@ namespace WinFormsApp_Test2
 		public int FallingShapeCol { get; set; }
 		public int FallingShapeRow { get; set; }
 
+		public int FallingShapeCols => FallingShape.GetUpperBound(1) + 1;
+		public int FallingShapeRows => FallingShape.GetUpperBound(0) + 1;
+
 		public Brush[,] NextShape { get; set; } = new Brush[0, 0];
 	}
 }
