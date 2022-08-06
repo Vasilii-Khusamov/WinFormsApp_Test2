@@ -1,4 +1,4 @@
-﻿namespace WinFormsApp_Test2
+﻿namespace WinFormsApp_Test2.Rules
 {
 	abstract internal class Rule
 	{

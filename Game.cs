@@ -1,5 +1,6 @@
 ﻿using WinFormTimer = System.Windows.Forms.Timer;
 using WinFormsApp_Test2.Commands;
+using WinFormsApp_Test2.Rules;
 
 namespace WinFormsApp_Test2
 {
