@@ -3,6 +3,6 @@
 	abstract internal class Rule
 	{
 		public abstract void Start();
-		public abstract void Tick();
+		public abstract void Tick(GameState gameState);
 	}
 }
