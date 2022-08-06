@@ -84,6 +84,21 @@ namespace WinFormsApp_Test2
 
 			// Создание команд.
 
+			mainForm.KeyDown += (object? sender, KeyEventArgs e) => {
+				switch (e.KeyCode)
+				{
+					case Keys.A: 
+						game.AddCommand(new MoveLeftFallingShape());
+						break;
+					case Keys.D:
+						game.AddCommand(new MoveRightFallingShape());
+						break;
+					case Keys.G:
+						game.AddCommand(new CreateRandomShape());
+						break;
+				}
+			};
+
 			// Запуск главной формы.
 
 			Application.Run(mainForm);

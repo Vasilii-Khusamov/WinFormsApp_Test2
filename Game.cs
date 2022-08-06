@@ -1,22 +1,21 @@
-using WinFormTimer = System.Windows.Forms.Timer;
+﻿using WinFormTimer = System.Windows.Forms.Timer;
+using WinFormsApp_Test2.Commands;
 
 namespace WinFormsApp_Test2
 {
 	internal class Game
 	{
-		private GameRenderer _gameRenderer = new GameRenderer(new Printer[0]);
+		private readonly Queue<Command> _commands = new Queue<Command>();
 
-		private Rule[] _rules = new Rule[0];
+		private readonly GameRenderer _gameRenderer = new GameRenderer(Array.Empty<Printer>());
 
-		private GameState _gameState = new GameState();
+		private readonly Rule[] _rules = Array.Empty<Rule>();
 
-		public GameState GameState { get { return _gameState; } set { _gameState = value; } }
+		private readonly GameState _gameState = new GameState();
 
+		public GameState GameState { get { return _gameState; } }
 
 		private readonly WinFormTimer _timer;
-		{
-			Interval = 33
-		};
 
 		public Game(GameRenderer gameRenderer, GameState gameState, Rule[] rules, WinFormTimer timer)
 		{
@@ -33,16 +32,30 @@ namespace WinFormsApp_Test2
 			{
 				rule.Start();
 			}
-			timer.Start();
+			_timer.Start();
+		}
+
+		public void AddCommand(Command command)
+		{
+			_commands.Enqueue(command);
 		}
 
 		private void Tick(object? sender, EventArgs e)
 		{
+			// INPUT
+			while (_commands.Count != 0)
+			{
+				Command command = _commands.Dequeue();
+				command.Execute(_gameState);
+			}
+			// UPDATE
 			foreach (Rule rule in _rules)
 			{
-				rule.Tick();
+				rule.Tick(_gameState);
 			}
+			// RENDER
 			_gameRenderer.Render();
 		}
+
 	}
 }
