@@ -75,7 +75,11 @@ namespace WinFormsApp_Test2
 
 			// Создание и запуск игры.
 
-			Game game = new Game(gameRenderer, gameState, new Rule[0]);
+			WinFormTimer timer = new WinFormTimer();
+			timer.Interval = 33;
+			
+
+			Game game = new Game(gameRenderer, gameState, new Rule[0], timer);
 			game.Start();
 
 			// Создание команд.

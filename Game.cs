@@ -1,4 +1,4 @@
-﻿using WinFormTimer = System.Windows.Forms.Timer;
+using WinFormTimer = System.Windows.Forms.Timer;
 
 namespace WinFormsApp_Test2
 {
@@ -13,17 +13,18 @@ namespace WinFormsApp_Test2
 		public GameState GameState { get { return _gameState; } set { _gameState = value; } }
 
 
-		private WinFormTimer timer = new WinFormTimer()
+		private readonly WinFormTimer _timer;
 		{
 			Interval = 33
 		};
 
-		public Game(GameRenderer gameRenderer, GameState gameState, Rule[] rules)
+		public Game(GameRenderer gameRenderer, GameState gameState, Rule[] rules, WinFormTimer timer)
 		{
 			_gameRenderer = gameRenderer;
 			_gameState = gameState;
 			_rules = rules;
-			timer.Tick += Tick;
+			_timer = timer;
+			_timer.Tick += Tick;
 		}
 
 		public void Start()
