@@ -19,5 +19,19 @@ namespace WinFormsApp_Test2
 		public int FallingShapeRows => FallingShape.GetUpperBound(0) + 1;
 
 		public Brush[,] NextShape { get; set; } = new Brush[0, 0];
+
+		public GameState Clone()
+		{
+			return new GameState()
+			{
+				Cup = (Brush[,])Cup.Clone(),
+				FallingShape = (Brush[,])FallingShape.Clone(),
+				FallingShapeCol = FallingShapeCol,
+				FallingShapeRow = FallingShapeRow,
+				NextShape = (Brush[,])NextShape.Clone(),
+				Score = Score,
+				State = (string)State.Clone()
+			};
+		}
 	}
 }
