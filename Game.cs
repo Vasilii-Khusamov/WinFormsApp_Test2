@@ -1,4 +1,4 @@
-﻿using WinFormTimer = System.Windows.Forms.Timer;
+using WinFormTimer = System.Windows.Forms.Timer;
 using WinFormsApp_Test2.Commands;
 using WinFormsApp_Test2.Rules;
 
@@ -18,7 +18,7 @@ namespace WinFormsApp_Test2
 
 		private readonly WinFormTimer _timer;
 
-		public Game(GameRenderer gameRenderer, GameState gameState, Rule[] rules, WinFormTimer timer)
+		public Game(GameRenderer gameRenderer, GameState gameState, WinFormTimer timer, Rule[] rules)
 		{
 			_gameRenderer = gameRenderer;
 			_gameState = gameState;
