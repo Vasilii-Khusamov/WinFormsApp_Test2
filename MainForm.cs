@@ -6,7 +6,5 @@ namespace WinFormsApp_Test2
         {
             InitializeComponent();
         }
-
-
-    }
+	}
 }

@@ -1,3 +1,8 @@
+using WinFormTimer = System.Windows.Forms.Timer;
+using System.Diagnostics;
+using System.Windows.Forms;
+using WinFormsApp_Test2.Commands;
+
 namespace WinFormsApp_Test2
 {
 	internal static class Program
@@ -8,7 +13,7 @@ namespace WinFormsApp_Test2
 		const int CupOffsetY = 5;
 
 		/// <summary>
-		/// Толщина стенок стакана. Единица измерения пиксели.
+		/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 		/// </summary>
 		private const int _cupThickness = 10;
 
@@ -31,11 +36,11 @@ namespace WinFormsApp_Test2
 			MainForm mainForm = new MainForm();
 			mainForm.Size = new(mainFormWidth, mainFormHeight);
 
-			// Создание состояния игры.
+			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ.
 
 			GameState gameState = new GameState();
 
-			// Создание стакана и падающей фигуры.
+			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ.
 
 			gameState.Cup = new Brush[cupRows, cupCols];
 			for (int row = 0; row < cupRows; row++)
@@ -48,7 +53,7 @@ namespace WinFormsApp_Test2
 
 			gameState.FallingShape = RandomShapeCreator.Create();
 			
-			// Создание принтеров.
+			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
 			Graphics mainGraphics = Graphics.FromHwnd(mainForm.Handle);
 
@@ -68,12 +73,12 @@ namespace WinFormsApp_Test2
 				}
 			);
 
-			// Создание и запуск игры.
+			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ.
 
 			Game game = new Game(gameRenderer, gameState, new Rule[0]);
 			game.Start();
 
-			// Запуск главной формы.
+			// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
 
 			Application.Run(mainForm);
 		}
