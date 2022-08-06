@@ -81,7 +81,8 @@ namespace WinFormsApp_Test2
 			
 
 			Game game = new Game(gameRenderer, gameState, timer, new Rule[] { 
-				new FallingShapeRule() 
+				new FallingShapeRule(),
+				new FallingShapeCollisionRule(),
 			});
 			game.Start();
 
