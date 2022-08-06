@@ -1,4 +1,4 @@
-namespace WinFormsApp_Test2
+﻿namespace WinFormsApp_Test2
 {
 	internal class GameState
 	{
@@ -10,8 +10,8 @@ namespace WinFormsApp_Test2
 		public string State { get; set; } = "pause";
 
 		public Brush[,] FallingShape { get; set; } = new Brush[0, 0];
-		public int FallingShapeX { get; set; }
-		public int FallingShapeY { get; set; }
+		public float FallingShapeTimer { get; set; }
+		public float FallingShapeDelay { get { return 15; } }
 		public int FallingShapeCol { get; set; }
 		public int FallingShapeRow { get; set; }
 

@@ -80,7 +80,9 @@ namespace WinFormsApp_Test2
 			timer.Interval = 33;
 			
 
-			Game game = new Game(gameRenderer, gameState, new Rule[0], timer);
+			Game game = new Game(gameRenderer, gameState, timer, new Rule[] { 
+				new FallingShapeRule() 
+			});
 			game.Start();
 
 			// Создание команд.
