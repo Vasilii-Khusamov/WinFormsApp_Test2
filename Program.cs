@@ -13,7 +13,7 @@ namespace WinFormsApp_Test2
 		const int CupOffsetY = 5;
 
 		/// <summary>
-		/// ������� ������ �������. ������� ��������� �������.
+		/// Толщина стенок стакана. Единица измерения пиксели.
 		/// </summary>
 		private const int _cupThickness = 10;
 
@@ -36,11 +36,11 @@ namespace WinFormsApp_Test2
 			MainForm mainForm = new MainForm();
 			mainForm.Size = new(mainFormWidth, mainFormHeight);
 
-			// �������� ��������� ����.
+			// Создание состояния игры.
 
 			GameState gameState = new GameState();
 
-			// �������� ������� � �������� ������.
+			// Создание стакана и падающей фигуры.
 
 			gameState.Cup = new Brush[cupRows, cupCols];
 			for (int row = 0; row < cupRows; row++)
@@ -53,7 +53,7 @@ namespace WinFormsApp_Test2
 
 			gameState.FallingShape = RandomShapeCreator.Create();
 			
-			// �������� ���������.
+			// Создание принтеров.
 
 			Graphics mainGraphics = Graphics.FromHwnd(mainForm.Handle);
 
@@ -73,12 +73,14 @@ namespace WinFormsApp_Test2
 				}
 			);
 
-			// �������� � ������ ����.
+			// Создание и запуск игры.
 
 			Game game = new Game(gameRenderer, gameState, new Rule[0]);
 			game.Start();
 
-			// ������ ������� �����.
+			// Создание команд.
+
+			// Запуск главной формы.
 
 			Application.Run(mainForm);
 		}
