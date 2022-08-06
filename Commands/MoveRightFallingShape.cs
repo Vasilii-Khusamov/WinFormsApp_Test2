@@ -1,4 +1,6 @@
-﻿namespace WinFormsApp_Test2.Commands
+﻿using WinFormsApp_Test2.Utils;
+
+namespace WinFormsApp_Test2.Commands
 {
 	internal class MoveRightFallingShape : Command
 	{
@@ -7,7 +9,7 @@
 			GameState gameStateClone = gameState.Clone();
 			gameStateClone.FallingShapeCol++;
 
-			if (!Utils.Collision.CheckFallingShapeWallsCollision(gameStateClone))
+			if (!Collision.CheckFallingShapeWallsCollision(gameStateClone) && !Collision.CheckFallingShapeCupCollision(gameStateClone))
 			{
 				gameState.FallingShapeCol++;
 			}
