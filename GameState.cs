@@ -12,6 +12,8 @@ namespace WinFormsApp_Test2
 		public Brush[,] FallingShape { get; set; } = new Brush[0, 0];
 		public int FallingShapeX { get; set; }
 		public int FallingShapeY { get; set; }
+		public int FallingShapeCol { get; set; }
+		public int FallingShapeRow { get; set; }
 
 		public Brush[,] NextShape { get; set; } = new Brush[0, 0];
 	}
