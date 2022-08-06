@@ -99,6 +99,9 @@ namespace WinFormsApp_Test2
 					case Keys.G:
 						game.AddCommand(new CreateRandomShape());
 						break;
+					case Keys.S:
+						game.AddCommand(new MoveDownFallingShape());
+						break;
 				}
 			};
 
