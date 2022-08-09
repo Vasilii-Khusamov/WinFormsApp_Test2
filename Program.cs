@@ -15,6 +15,8 @@ namespace WinFormsApp_Test2
 		const int CupThickness = 10;
 		const int CupOffsetX = 5;
 		const int CupOffsetY = 5;
+		const int cupRows = 20;
+		const int cupCols = 10;
 
 		/// <summary>
 		/// Толщина стенок стакана. Единица измерения пиксели.
@@ -31,8 +33,7 @@ namespace WinFormsApp_Test2
 			// see https://aka.ms/applicationconfiguration.
 			ApplicationConfiguration.Initialize();
 
-			const int cupRows = 20;
-			const int cupCols = 10;
+			#region Главная форма игры.
 
 			int mainFormHeight = cupRows * BrickSize + CupThickness + CupOffsetY + 45;
 			int mainFormWidth = cupCols * BrickSize + CupThickness * 2 + CupOffsetX * 2 + 15 + 200;
