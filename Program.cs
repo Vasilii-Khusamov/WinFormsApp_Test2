@@ -41,11 +41,15 @@ namespace WinFormsApp_Test2
 			MainForm mainForm = new MainForm();
 			mainForm.Size = new(mainFormWidth, mainFormHeight);
 
-			// Создание состояния игры.
+			#endregion
+
+			#region Создание состояния игры.
 
 			GameState gameState = new GameState();
 
-			// Создание стакана и падающей фигуры.
+			#endregion
+
+			#region Создание стакана и падающей фигуры.
 
 			gameState.Cup = new Brush[cupRows, cupCols];
 			for (int row = 0; row < cupRows; row++)
@@ -57,8 +61,10 @@ namespace WinFormsApp_Test2
 			}
 
 			gameState.FallingShape = RandomShapeCreator.Create();
-			
-			// Создание принтеров.
+
+			#endregion
+
+			#region Создание принтеров.
 
 			Graphics mainGraphics = Graphics.FromHwnd(mainForm.Handle);
 
@@ -78,19 +84,22 @@ namespace WinFormsApp_Test2
 				}
 			);
 
-			// Создание и запуск игры.
+			#endregion
+
+			#region Создание и запуск игры.
 
 			WinFormTimer timer = new WinFormTimer();
 			timer.Interval = 33;
 			
-
 			Game game = new Game(gameRenderer, gameState, timer, new Rule[] { 
 				new FallingShapeRule(),
 				new FallingShapeCollisionRule(),
 			});
 			game.Start();
 
-			// Создание команд.
+			#endregion
+
+			#region Создание команд.
 
 			mainForm.KeyDown += (object? sender, KeyEventArgs e) => {
 				switch (e.KeyCode)
@@ -110,10 +119,13 @@ namespace WinFormsApp_Test2
 				}
 			};
 
-			// Запуск главной формы.
+			#endregion
+
+			#region Запуск главной формы.
 
 			Application.Run(mainForm);
-		}
 
+			#endregion
+		}
 	}
 }
