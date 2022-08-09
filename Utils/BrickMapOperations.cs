@@ -1,4 +1,5 @@
 ﻿using WinFormsApp_Test2.GameData;
+using WinFormsApp_Test2.Extentions;
 
 namespace WinFormsApp_Test2.Utils
 {
@@ -25,6 +26,28 @@ namespace WinFormsApp_Test2.Utils
 					{
 						result[row + offsetRow, col + offsetCol] = target[row, col];
 					}
+				}
+			}
+
+			return result;
+		}
+
+		/// <summary>
+		/// Вращение массива brickMap по часовой стрелке.
+		/// </summary>
+		/// <param name="brickMap">Исходный массив</param>
+		/// <returns>Повёрнутый массив</returns>
+		public static Brush[,] Rotate(Brush[,] brickMap)
+		{
+			(int rows, int cols) = brickMap.GetSize();
+
+			Brush[,] result = new Brush[cols, rows];
+
+			for (int col = 0; col < cols; col++)
+			{
+				for (int row = 0; row < rows; row++)
+				{
+					result[row,col] = brickMap[col, rows - row - 1];
 				}
 			}
 
