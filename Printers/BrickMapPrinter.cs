@@ -1,4 +1,4 @@
-﻿namespace WinFormsApp_Test2
+﻿namespace WinFormsApp_Test2.Printers
 {
 	abstract internal class BrickMapPrinter : Printer
 	{
@@ -38,11 +38,11 @@
 
 		protected virtual int CalculateBrickX(int col)
 		{
-			return _offsetX + (col * _brickSize);
+			return _offsetX + col * _brickSize;
 		}
 		protected virtual int CalculateBrickY(int row)
 		{
-			return _offsetY + (row * _brickSize);
+			return _offsetY + row * _brickSize;
 		}
 
 

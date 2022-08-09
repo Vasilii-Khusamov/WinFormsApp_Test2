@@ -1,4 +1,4 @@
-﻿namespace WinFormsApp_Test2
+﻿namespace WinFormsApp_Test2.Printers
 {
 	internal class CupPrinter : BrickMapPrinter
 	{
@@ -27,7 +27,7 @@
 			_gameState = gameState;
 			_cupThickness = cupThickness;
 		}
-		
+
 		public override void Print()
 		{
 			PrintBackgroundAndWalls();

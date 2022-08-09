@@ -1,4 +1,4 @@
-﻿namespace WinFormsApp_Test2
+﻿namespace WinFormsApp_Test2.Printers
 {
 	/// <summary>
 	/// Класс построен на основе примера со страницы:

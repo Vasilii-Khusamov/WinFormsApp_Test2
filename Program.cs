@@ -3,6 +3,9 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using WinFormsApp_Test2.Commands;
 using WinFormsApp_Test2.Rules;
+using WinFormsApp_Test2.Printers;
+using WinFormsApp_Test2.Utils;
+using WinFormsApp_Test2.GameData;
 
 namespace WinFormsApp_Test2
 {

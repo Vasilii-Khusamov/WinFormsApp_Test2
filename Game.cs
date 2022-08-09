@@ -1,6 +1,7 @@
-using WinFormTimer = System.Windows.Forms.Timer;
+﻿using WinFormTimer = System.Windows.Forms.Timer;
 using WinFormsApp_Test2.Commands;
 using WinFormsApp_Test2.Rules;
+using WinFormsApp_Test2.Printers;
 
 namespace WinFormsApp_Test2
 {
