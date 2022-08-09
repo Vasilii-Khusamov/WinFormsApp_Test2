@@ -1,4 +1,6 @@
-﻿namespace WinFormsApp_Test2
+﻿using WinFormsApp_Test2.GameData;
+
+namespace WinFormsApp_Test2.Utils
 {
 	internal class RandomShapeCreator
 	{
