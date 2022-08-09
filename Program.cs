@@ -116,6 +116,9 @@ namespace WinFormsApp_Test2
 					case Keys.S:
 						game.AddCommand(new MoveDownFallingShape());
 						break;
+					case Keys.W:
+						game.AddCommand(new RotateFallingShape());
+						break;
 				}
 			};
 
