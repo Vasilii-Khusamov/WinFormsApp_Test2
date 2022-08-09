@@ -1,4 +1,6 @@
-﻿namespace WinFormsApp_Test2.Utils
+﻿using WinFormsApp_Test2.GameData;
+
+namespace WinFormsApp_Test2.Utils
 {
 	internal class Collision
 	{
