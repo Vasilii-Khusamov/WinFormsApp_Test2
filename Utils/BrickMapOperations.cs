@@ -22,7 +22,15 @@ namespace WinFormsApp_Test2.Utils
 			{
 				for (int row = 0; row < target.GetUpperBound(0) + 1; row++)
 				{
-					if (target[row, col] != BrickBrushPalette.EmptyBrickBrush)
+					if 
+					(
+						target[row, col] != BrickBrushPalette.EmptyBrickBrush && 
+						row + offsetRow >= 0 &&
+						row + offsetRow <= destination.GetUpperBound(0) &&
+
+						col + offsetCol >= 0 &&
+						col + offsetCol <= destination.GetUpperBound(1)
+					)
 					{
 						result[row + offsetRow, col + offsetCol] = target[row, col];
 					}
