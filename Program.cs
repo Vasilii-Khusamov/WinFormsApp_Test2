@@ -89,7 +89,7 @@ namespace WinFormsApp_Test2
 			#region Создание и запуск игры.
 
 			WinFormTimer timer = new WinFormTimer();
-			timer.Interval = 33;
+			timer.Interval = 16;
 			
 			Game game = new Game(gameRenderer, gameState, timer, new Rule[] { 
 				new FallingShapeRule(),
