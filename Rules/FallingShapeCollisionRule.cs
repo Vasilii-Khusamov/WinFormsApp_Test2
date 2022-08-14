@@ -1,4 +1,4 @@
-﻿using WinFormsApp_Test2.Utils;
+using WinFormsApp_Test2.Utils;
 
 namespace WinFormsApp_Test2.Rules
 {
@@ -23,6 +23,8 @@ namespace WinFormsApp_Test2.Rules
 				gameState.FallingShape = RandomShapeCreator.Create();
 				gameState.FallingShapeCol = 3;
 				gameState.FallingShapeRow = -2;
+				gameState.FallingShapeTimer = GameState.FallingShapeDelay;
+				gameState.FallingShapeSlideTimer = GameState.FallingShapeSlideDelay;
 			}
 		}
 	}
