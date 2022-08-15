@@ -74,13 +74,15 @@ namespace WinFormsApp_Test2
 			ClearPrinter clearPrinter = new ClearPrinter(secondGraphics);
 			CupPrinter cupPrinter = new CupPrinter(CupOffsetX, CupOffsetY, secondGraphics, gameState, _cupThickness);
 			FallingShapePrinter fallingShapePrinter = new FallingShapePrinter(CupOffsetX + _cupThickness, CupOffsetY, secondGraphics, gameState);
+			ScorePrinter scorePrinter = new ScorePrinter(mainForm, gameState);
 
 			GameRenderer gameRenderer = new GameRenderer(
 				new Printer[] { 
-					clearPrinter,
+					clearPrinter, // Этот принтер дожен быть первым.
 					cupPrinter, 
-					fallingShapePrinter, 
-					secondBufferPrinter 
+					fallingShapePrinter,
+					scorePrinter, 
+					secondBufferPrinter, // Этот принтер дожен быть последним.
 				}
 			);
 
