@@ -61,5 +61,29 @@ namespace WinFormsApp_Test2.Utils
 
 			return result;
 		}
+
+		public static Brush[,] ClearLines(Brush[,] target, bool[] rows)
+        {
+			Brush[,] result = (Brush[,])target.Clone();
+
+			for (int row1 = 0; row1 <= rows.GetUpperBound(0); row1++)
+            {
+				if (row1 > result.GetUpperBound(0)) break;
+
+				if (rows[row1])
+                {
+					for (int row2 = row1; row2 >= 0; row2--)
+                    {
+						for (int col = 0; col <= result.GetUpperBound(1); col++) result[row2, col] = result[row2 - 1, col];
+                    }
+                }
+                else
+                {
+					continue;
+                }
+            }
+
+			return result;
+        }
 	}
 }
