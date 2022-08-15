@@ -74,7 +74,17 @@ namespace WinFormsApp_Test2.Utils
                 {
 					for (int row2 = row1; row2 >= 0; row2--)
                     {
-						for (int col = 0; col <= result.GetUpperBound(1); col++) result[row2, col] = result[row2 - 1, col];
+						for (int col = 0; col <= result.GetUpperBound(1); col++)
+                        {
+							if (row2 != 0)
+                            {
+								result[row2, col] = result[row2 - 1, col];
+                            }
+                            else
+                            {
+								result[row2, col] = BrickBrushPalette.EmptyBrickBrush;
+                            }
+                        }
                     }
                 }
                 else
