@@ -61,7 +61,12 @@ namespace WinFormsApp_Test2.Utils
 
 			return result;
 		}
-
+		/// <summary>
+		/// Удаление Строк из двухмерного массива
+		/// </summary>
+		/// <param name="target">Исходный массив</param>
+		/// <param name="rows">Строки которые надо удалить</param>
+		/// <returns>Исходный массив без Строк которых надо удалить</returns>
 		public static Brush[,] ClearLines(Brush[,] target, bool[] rows)
         {
 			Brush[,] result = (Brush[,])target.Clone();
