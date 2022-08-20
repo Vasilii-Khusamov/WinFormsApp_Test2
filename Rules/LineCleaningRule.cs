@@ -4,7 +4,7 @@ using WinFormsApp_Test2.GameData;
 
 namespace WinFormsApp_Test2.Rules
 {
-    internal class ClearLinesRule : Rule
+    internal class LineCleaningRule : Rule
     {
         public override void Start()
         {
