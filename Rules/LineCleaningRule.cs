@@ -32,17 +32,15 @@ namespace WinFormsApp_Test2.Rules
 
             gameState.Cup = BrickMapOperations.ClearLines(gameState.Cup, rowsForClearing);
 
-            int tempScore = 0;
+            int rowsClearedNumber = 0;
 
             foreach (bool rowForClearing in rowsForClearing)
             {
-                if (rowForClearing) tempScore++;
+                if (rowForClearing) rowsClearedNumber++;
             }
 
-            if (tempScore == 4) tempScore = 1000;
-            else tempScore = tempScore * 100;
-
-            gameState.Score = tempScore;
+            if (rowsClearedNumber == 4) gameState.Score += 1000;
+            else gameState.Score += rowsClearedNumber * 100;
         }
     }
 }
