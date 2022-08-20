@@ -11,6 +11,7 @@ namespace WinFormsApp_Test2.Commands
 		public override void Execute(GameState gameState)
 		{
 			gameState.FallingShapeTimer = 0;
+			gameState.FallingShapeSlideTimer = 0;
 		}
 	}
 }
