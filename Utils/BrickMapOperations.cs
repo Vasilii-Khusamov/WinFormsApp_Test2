@@ -61,5 +61,46 @@ namespace WinFormsApp_Test2.Utils
 
 			return result;
 		}
+		/// <summary>
+		/// Удаление Строк из двухмерного массива
+		/// </summary>
+		/// <param name="target">Исходный массив</param>
+		/// <param name="rows">Строки которые надо удалить</param>
+		/// <returns>Исходный массив без Строк которых надо удалить</returns>
+		public static Brush[,] ClearLines(Brush[,] target, bool[] rows)
+        {
+			Brush[,] result = (Brush[,])target.Clone();
+
+				if (rows.Length > result.GetSize().Item1) 
+				throw new ArgumentException("Колличество строк в target должна быть ровна Колличеству элементов в rows");
+
+
+			for (int row1 = 0; row1 < rows.Length; row1++)
+            {
+				if (rows[row1])
+                {
+					for (int row2 = row1; row2 >= 0; row2--)
+                    {
+						for (int col = 0; col < result.GetSize().Item2; col++)
+                        {
+							if (row2 != 0)
+                            {
+								result[row2, col] = result[row2 - 1, col];
+                            }
+                            else
+                            {
+								result[row2, col] = BrickBrushPalette.EmptyBrickBrush;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+					continue;
+                }
+            }
+
+			return result;
+        }
 	}
 }
