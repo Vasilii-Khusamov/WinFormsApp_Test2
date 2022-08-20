@@ -71,10 +71,12 @@ namespace WinFormsApp_Test2.Utils
         {
 			Brush[,] result = (Brush[,])target.Clone();
 
+				if (rows.Length > result.GetSize().Item1) 
+				throw new ArgumentException("Колличество строк в target должна быть ровна Колличеству элементов в rows");
+
+
 			for (int row1 = 0; row1 < rows.Length; row1++)
             {
-				if (row1 > result.GetSize().Item1) break;
-
 				if (rows[row1])
                 {
 					for (int row2 = row1; row2 >= 0; row2--)
