@@ -71,7 +71,7 @@ namespace WinFormsApp_Test2.Utils
         {
 			Brush[,] result = (Brush[,])target.Clone();
 
-			for (int row1 = 0; row1 <= rows.GetUpperBound(0); row1++)
+			for (int row1 = 0; row1 < rows.Length; row1++)
             {
 				if (row1 > result.GetUpperBound(0)) break;
 
