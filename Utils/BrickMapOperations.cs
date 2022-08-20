@@ -1,4 +1,5 @@
 ﻿using WinFormsApp_Test2.GameData;
+using WinFormsApp_Test2.Extentions;
 
 namespace WinFormsApp_Test2.Utils
 {
@@ -21,7 +22,15 @@ namespace WinFormsApp_Test2.Utils
 			{
 				for (int row = 0; row < target.GetUpperBound(0) + 1; row++)
 				{
-					if (target[row, col] != BrickBrushPalette.EmptyBrickBrush)
+					if 
+					(
+						target[row, col] != BrickBrushPalette.EmptyBrickBrush && 
+						row + offsetRow >= 0 &&
+						row + offsetRow <= destination.GetUpperBound(0) &&
+
+						col + offsetCol >= 0 &&
+						col + offsetCol <= destination.GetUpperBound(1)
+					)
 					{
 						result[row + offsetRow, col + offsetCol] = target[row, col];
 					}
@@ -30,5 +39,68 @@ namespace WinFormsApp_Test2.Utils
 
 			return result;
 		}
+
+		/// <summary>
+		/// Вращение массива brickMap по часовой стрелке.
+		/// </summary>
+		/// <param name="brickMap">Исходный массив</param>
+		/// <returns>Повёрнутый массив</returns>
+		public static Brush[,] Rotate(Brush[,] brickMap)
+		{
+			(int rows, int cols) = brickMap.GetSize();
+
+			Brush[,] result = new Brush[cols, rows];
+
+			for (int col = 0; col < cols; col++)
+			{
+				for (int row = 0; row < rows; row++)
+				{
+					result[row,col] = brickMap[col, rows - row - 1];
+				}
+			}
+
+			return result;
+		}
+		/// <summary>
+		/// Удаление Строк из двухмерного массива
+		/// </summary>
+		/// <param name="target">Исходный массив</param>
+		/// <param name="rows">Строки которые надо удалить</param>
+		/// <returns>Исходный массив без Строк которых надо удалить</returns>
+		public static Brush[,] ClearLines(Brush[,] target, bool[] rows)
+        {
+			Brush[,] result = (Brush[,])target.Clone();
+
+				if (rows.Length > result.GetSize().Item1) 
+				throw new ArgumentException("Колличество строк в target должна быть ровна Колличеству элементов в rows");
+
+
+			for (int row1 = 0; row1 < rows.Length; row1++)
+            {
+				if (rows[row1])
+                {
+					for (int row2 = row1; row2 >= 0; row2--)
+                    {
+						for (int col = 0; col < result.GetSize().Item2; col++)
+                        {
+							if (row2 != 0)
+                            {
+								result[row2, col] = result[row2 - 1, col];
+                            }
+                            else
+                            {
+								result[row2, col] = BrickBrushPalette.EmptyBrickBrush;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+					continue;
+                }
+            }
+
+			return result;
+        }
 	}
 }

@@ -74,13 +74,15 @@ namespace WinFormsApp_Test2
 			ClearPrinter clearPrinter = new ClearPrinter(secondGraphics);
 			CupPrinter cupPrinter = new CupPrinter(CupOffsetX, CupOffsetY, secondGraphics, gameState, _cupThickness);
 			FallingShapePrinter fallingShapePrinter = new FallingShapePrinter(CupOffsetX + _cupThickness, CupOffsetY, secondGraphics, gameState);
+			ScorePrinter scorePrinter = new ScorePrinter(mainForm, gameState);
 
 			GameRenderer gameRenderer = new GameRenderer(
 				new Printer[] { 
-					clearPrinter,
+					clearPrinter, // Этот принтер дожен быть первым.
 					cupPrinter, 
-					fallingShapePrinter, 
-					secondBufferPrinter 
+					fallingShapePrinter,
+					scorePrinter, 
+					secondBufferPrinter, // Этот принтер дожен быть последним.
 				}
 			);
 
@@ -89,11 +91,13 @@ namespace WinFormsApp_Test2
 			#region Создание и запуск игры.
 
 			WinFormTimer timer = new WinFormTimer();
-			timer.Interval = 33;
+			timer.Interval = 16;
 			
 			Game game = new Game(gameRenderer, gameState, timer, new Rule[] { 
 				new FallingShapeRule(),
 				new FallingShapeCollisionRule(),
+				new LineCleaningRule(),
+				new TestRule(),
 			});
 			game.Start();
 
@@ -115,6 +119,9 @@ namespace WinFormsApp_Test2
 						break;
 					case Keys.S:
 						game.AddCommand(new MoveDownFallingShape());
+						break;
+					case Keys.W:
+						game.AddCommand(new RotateFallingShape());
 						break;
 				}
 			};
