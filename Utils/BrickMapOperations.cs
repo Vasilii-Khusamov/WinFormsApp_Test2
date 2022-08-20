@@ -79,7 +79,7 @@ namespace WinFormsApp_Test2.Utils
                 {
 					for (int row2 = row1; row2 >= 0; row2--)
                     {
-						for (int col = 0; col <= result.GetUpperBound(1); col++)
+						for (int col = 0; col < result.GetSize().Item2; col++)
                         {
 							if (row2 != 0)
                             {
