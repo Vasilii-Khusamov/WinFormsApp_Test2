@@ -73,7 +73,7 @@ namespace WinFormsApp_Test2.Utils
 
 			for (int row1 = 0; row1 < rows.Length; row1++)
             {
-				if (row1 > result.GetUpperBound(0)) break;
+				if (row1 > result.GetSize().Item1) break;
 
 				if (rows[row1])
                 {
