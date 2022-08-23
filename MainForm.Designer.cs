@@ -66,7 +66,7 @@
             this.Controls.Add(this.scoreLabel);
             this.Controls.Add(this.scoreTitleLabel);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "Tetris 1.0.0";
             this.ResumeLayout(false);
             this.PerformLayout();
 
