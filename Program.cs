@@ -6,6 +6,7 @@ using WinFormsApp_Test2.Rules;
 using WinFormsApp_Test2.Printers;
 using WinFormsApp_Test2.Utils;
 using WinFormsApp_Test2.GameData;
+using WinFormsApp_Test2.Forms;
 
 namespace WinFormsApp_Test2
 {
@@ -33,6 +34,12 @@ namespace WinFormsApp_Test2
 			// see https://aka.ms/applicationconfiguration.
 			ApplicationConfiguration.Initialize();
 
+			#region Создание состояния игры.
+
+			GameState gameState = new GameState();
+
+			#endregion
+
 			#region Главная форма игры.
 
 			int mainFormHeight = cupRows * BrickSize + CupThickness + CupOffsetY + 45;
@@ -43,15 +50,42 @@ namespace WinFormsApp_Test2
 
 			#endregion
 
-			#region Создание состояния игры.
+			#region Форма GameOver
 
-			GameState gameState = new GameState();
+			GameOverForm gameOverForm = new GameOverForm();
+			gameOverForm.ButtonClick += (string clickedButtonName, object sender, EventArgs e) =>
+			{
+				switch (clickedButtonName)
+				{
+					case "restartButtonClick":
+						gameState.FallingShape = RandomShapeCreator.Create();
+						gameState.FallingShapeRow = -2;
+						gameState.Score = 0;
+						gameState.Status = "running";
+						gameOverForm.Hide();
+						mainForm.Show();
+						break;
+					case "newGameButtonClick":
+						// TODO Запросить имя игрока.
+						gameState.FallingShape = RandomShapeCreator.Create();
+						gameState.FallingShapeRow = -2;
+						gameState.Score = 0;
+						gameState.Status = "running";
+						gameOverForm.Hide();
+						mainForm.Show();
+						break;
+					case "exitButtonClick":
+						// TODO Тут происходит вылет игры.
+						mainForm.Close();
+						break;
+				}
+			};
 
-			#endregion
+            #endregion
 
-			#region Создание стакана и падающей фигуры.
+            #region Создание стакана и падающей фигуры.
 
-			gameState.Cup = new Brush[cupRows, cupCols];
+            gameState.Cup = new Brush[cupRows, cupCols];
 			for (int row = 0; row < cupRows; row++)
 			{
 				for (int col = 0; col < cupCols; col++)
@@ -75,13 +109,15 @@ namespace WinFormsApp_Test2
 			CupPrinter cupPrinter = new CupPrinter(CupOffsetX, CupOffsetY, secondGraphics, gameState, _cupThickness);
 			FallingShapePrinter fallingShapePrinter = new FallingShapePrinter(CupOffsetX + _cupThickness, CupOffsetY, secondGraphics, gameState);
 			ScorePrinter scorePrinter = new ScorePrinter(mainForm, gameState);
+			GameOverPrinter gameOverPrinter = new GameOverPrinter(gameState, mainForm, gameOverForm);
 
 			GameRenderer gameRenderer = new GameRenderer(
 				new Printer[] { 
 					clearPrinter, // Этот принтер дожен быть первым.
 					cupPrinter, 
 					fallingShapePrinter,
-					scorePrinter, 
+					scorePrinter,
+					gameOverPrinter,
 					secondBufferPrinter, // Этот принтер дожен быть последним.
 				}
 			);
@@ -94,6 +130,7 @@ namespace WinFormsApp_Test2
 			timer.Interval = 16;
 			
 			Game game = new Game(gameRenderer, gameState, timer, new Rule[] { 
+				new GameOverRule(),
 				new FallingShapeRule(),
 				new FallingShapeCollisionRule(),
 				new LineCleaningRule(),
