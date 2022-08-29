@@ -76,7 +76,7 @@ namespace WinFormsApp_Test2
 						break;
 					case "exitButtonClick":
 						// TODO Сделать вызов метода, который останавливает игру.
-						mainForm.Close();
+						Application.Exit();
 						break;
 				}
 			};
