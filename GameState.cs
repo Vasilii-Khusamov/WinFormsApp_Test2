@@ -8,7 +8,7 @@
 		public int CupRows => Cup.GetUpperBound(0) + 1;
 
 		public int Score { get; set; }
-		public string State { get; set; } = "pause";
+		public string Status { get; set; } = "pause";
 
 		public Brush[,] FallingShape { get; set; } = new Brush[0, 0];
 		public int FallingShapeTimer { get; set; } = FallingShapeDelay;
@@ -33,7 +33,7 @@
 				FallingShapeRow = FallingShapeRow,
 				NextShape = (Brush[,])NextShape.Clone(),
 				Score = Score,
-				State = (string)State.Clone()
+				Status = (string)Status.Clone()
 			};
 		}
 	}
