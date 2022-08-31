@@ -11,7 +11,7 @@
 			}
 		}
 
-		public static SolidBrush[] Palette = {
+		public static Brush[] Palette = {
 			new SolidBrush(Color.FromArgb(0, Color.Black)),
 			new SolidBrush(Color.Red),
 			new SolidBrush(Color.Orange),
